@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --GreenLight: hsl(148, 38%, 91%);
+  --GreenMedium: hsl(169, 82%, 27%);
+  --Red: hsl(0, 66%, 54%);
+  --White: hsl(0, 0%, 100%);
+  --GreyMedium: hsl(186, 15%, 59%);
+  --GreyDark: hsl(187, 24%, 22%);
+
+}
