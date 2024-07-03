@@ -10,6 +10,7 @@ body {
   background-color: var(--GreenLight);
   font-size: 1rem;
   font-family: "Karla", sans-serif;
+  color: var(--GreyDark);
 }
 
 .App {
@@ -22,8 +23,9 @@ body {
 
 .form-main {
   display: flex;
+  flex-direction: column;
   background-color: var(--White);
-  width: 500px;
+  width: 600px;
   height: auto;
   border-radius: 12px;
   padding: 30px;
@@ -32,4 +34,29 @@ body {
 .form-main h2 {
   color: var(--GreyDark);
   margin: 0;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin: 25px 0;
+}
+
+.box-input {
+  width: 265px;
+}
+
+.box-input .label {
+  font-size: 0.9rem;
+}
+
+.box-input input {
+  width: 100%;
+  margin: 8px 0;
+  border-radius: 5px;
+  padding: 8px 14px;
+  text-decoration: none;
+  border: 1px solid var(--GreyMedium);
 }
