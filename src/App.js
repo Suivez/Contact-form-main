@@ -19,7 +19,7 @@ function App() {
           {inputComponent("Last Name", "text")}
         </div>
         <div className='form-section'>
-          {inputComponent("Email Address", "Email")}
+          {inputComponent("Email Address", "email")}
         </div>
       </div>
     </div>
