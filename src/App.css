@@ -49,7 +49,7 @@ body {
   width: 100%;
 }
 
-.box-input .label {
+.label {
   font-size: 0.9rem;
 }
 
@@ -60,4 +60,24 @@ body {
   padding: 10px 14px;
   text-decoration: none;
   border: 1px solid var(--GreyMedium);
+}
+
+.radio-box {
+  width: 100%;
+  display: flex;
+}
+
+.radio-option {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  border: 1px solid black;
+}
+
+.radio-option input {
+  width: 40px;
+}
+
+.radio-option label {
+  width: 100%;
 }
