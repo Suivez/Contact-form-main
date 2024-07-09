@@ -81,3 +81,8 @@ body {
 .radio-option label {
   width: 100%;
 }
+
+.radio-section {
+  display: flex;
+  
+}
