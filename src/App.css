@@ -56,8 +56,8 @@ body {
 .box-input input {
   width: 100%;
   margin: 8px 0;
-  border-radius: 5px;
-  padding: 10px 14px;
+  border-radius: 6px;
+  padding: 10px 16px;
   text-decoration: none;
   border: 1px solid var(--GreyMedium);
 }
@@ -72,17 +72,22 @@ body {
   width: 100%;
   flex-direction: row;
   border: 1px solid black;
+  padding: 10px 15px;
+  border-radius: 6px;
 }
 
-.radio-option input {
-  width: auto;
+input[type=radio] {
+  transform: scale(1.2);
+  margin-right: 15px;
+  border: 6px solid black;
+  border-radius: 50%;
+  
+}
+
+input[type=radio]:checked {
+  accent-color: red;
 }
 
 .radio-option label {
   width: 100%;
-}
-
-.radio-section {
-  display: flex;
-  
 }
