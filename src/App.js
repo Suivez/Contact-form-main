@@ -4,7 +4,7 @@ function App() {
   const inputComponent = (labelName, type, errorState) => {
     return (
       <div className='box-input'>
-        <div className='label'>{labelName} <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
+        <div className='label-title'>{labelName} <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
         <input type={type}></input>
       </div>
     );
@@ -32,10 +32,16 @@ function App() {
         <div className='form-section'>
           {inputComponent("Email Address", "email")}
         </div>
-        <div className='label'>Query Type <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
+        <div className='label-title'>Query Type <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
         <div className='form-section'>
           {radioComponent("General Enquiry")}
           {radioComponent("Support Request")}
+        </div>
+        <div className='form-section'>
+          <div className='box-input'>
+            <div className='label-title'>Message <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
+            <textarea/>
+          </div>
         </div>
       </div>
     </div>
