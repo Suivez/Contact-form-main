@@ -4,7 +4,7 @@ function App() {
   const inputComponent = (labelName, type, errorState) => {
     return (
       <div className='box-input'>
-        <div className='label-title'>{labelName} <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
+        <label className='label-title'>{labelName} <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></label>
         <input type={type}></input>
       </div>
     );
@@ -41,6 +41,12 @@ function App() {
           <div className='box-input'>
             <div className='label-title'>Message <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
             <textarea/>
+          </div>
+        </div>
+        <div className='form-section'>
+          <div className='checkbox-input'>
+            <input type='checkbox' id='checkbox1'/>
+            <label for="checkbox1">I consent to being contacted by the team <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></label>
           </div>
         </div>
       </div>
