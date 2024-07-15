@@ -12,12 +12,12 @@ function App() {
 
   const radioComponent = (radioTitle, erroState) => {
     return (
-      <div className='radio-box'>
         <div className='radio-option'>
+        <label for={radioTitle}>
           <input type='radio' id={radioTitle} name="choice"/>
-          <label for={radioTitle}>{radioTitle}</label>
+          {radioTitle}
+        </label>
         </div>
-      </div>
     );
   }
 
@@ -32,10 +32,12 @@ function App() {
         <div className='form-section'>
           {inputComponent("Email Address", "email")}
         </div>
-        <div className='label-title'>Query Type <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
         <div className='form-section'>
-          {radioComponent("General Enquiry")}
-          {radioComponent("Support Request")}
+          <div className='label-title'>Query Type <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
+          <div className='radio-section'>
+            {radioComponent("General Enquiry")}
+            {radioComponent("Support Request")}
+          </div>
         </div>
         <div className='form-section'>
           <div className='box-input'>
@@ -48,6 +50,9 @@ function App() {
             <input type='checkbox' id='checkbox1'/>
             <label for="checkbox1">I consent to being contacted by the team <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></label>
           </div>
+        </div>
+        <div className='form-section'>
+          <button>Submit</button>
         </div>
       </div>
     </div>
