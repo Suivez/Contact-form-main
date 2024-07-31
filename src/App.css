@@ -57,8 +57,12 @@ body {
   width: 100%;
 }
 
-.label-title {
+.label-title, .error-label {
   font-size: 0.9rem;
+}
+
+.error-label {
+  color: var(--Red);
 }
 
 .box-input input {
