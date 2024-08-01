@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import './App.css';
-
+import IconSuccess from './images/icon-success-check.svg'
 function App() {
   const [errorFirstName, setErrorFirstName] = useState("");
   const [errorLastName, setErrorLastName] = useState("");
@@ -17,14 +17,16 @@ function App() {
   const inputRefMesssge = useRef(null);
   const inputRefCheckbox = useRef(null);
 
+  const [displayPopup, setDisplayPopup] = useState("none");
+
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
-}
+  }
 
   const inputComponent = (labelName, type, errorState, ref) => {
     return (
       <div className='box-input'>
-        <label className='label-title'>{labelName} <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></label>
+        <label className='label-title'>{labelName} <span style={{ color: "hsl(169, 82%, 27%)" }}>*</span></label>
         <input type={type} ref={ref}></input>
         <label className='error-label'>{errorState}</label>
       </div>
@@ -33,12 +35,25 @@ function App() {
 
   const radioComponent = (radioTitle, ref) => {
     return (
-        <div className='radio-option'>
-        <label for={radioTitle}>
-          <input type='radio' id={radioTitle} name="choice" ref={ref}/>
+      <div className='radio-option'>
+          <input type='radio' id={radioTitle} name="choice" ref={ref} />
+          <span className='checkmark-radio'></span>
+          <label for={radioTitle} style={{marginLeft: '35px'}}>
           {radioTitle}
         </label>
+      </div>
+    );
+  }
+
+  const resultPopup = () => {
+    return (
+      <div className='popup-container' style={{ display: displayPopup }}>
+        <div className='popup-title'>
+          <img src={IconSuccess} alt="success" />
+          <h4>Message sent!</h4>
         </div>
+        <p>Thanks for completing the form. We'll be in touch soon!</p>
+      </div>
     );
   }
 
@@ -46,52 +61,74 @@ function App() {
     event.preventDefault();
 
     console.log("General Enquiry: ", inputRefRadioGeneralEnquiry.current.checked);
-    console.log("Support Request: ",inputRefRadioSupportRequest.current.checked);
+    console.log("Support Request: ", inputRefRadioSupportRequest.current.checked);
     console.log("Checkbox: ", inputRefCheckbox.current.checked);
 
-    if(inputRefRadioGeneralEnquiry.current.checked === false && inputRefRadioSupportRequest.current.checked === false) {
+    if (inputRefRadioGeneralEnquiry.current.checked === false && inputRefRadioSupportRequest.current.checked === false) {
       setErrorRadio("Please select a query type");
     }
     else {
       setErrorRadio("");
     }
 
-    if(inputRefCheckbox.current.checked === false) {
+    if (inputRefCheckbox.current.checked === false) {
       setErrorCheckbox("To submit this form, please consent to being contacted");
     }
     else {
       setErrorCheckbox("");
     }
 
-    if(inputRefEmail.current.value === "") {
+    if (inputRefEmail.current.value === "") {
       setErrorEmail("This field is required");
     }
-    else if(!isValidEmail(inputRefEmail.current.value)) {
+    else if (!isValidEmail(inputRefEmail.current.value)) {
       setErrorEmail("Please enter a valid email address");
     }
     else {
       setErrorEmail("");
     }
 
-    if(inputRefFirstName.current.value === "") {
+    if (inputRefFirstName.current.value === "") {
       setErrorFirstName("This field is required");
     }
     else {
       setErrorFirstName("");
     }
-    
-    if(inputRefLastName.current.value === "") {
+
+    if (inputRefLastName.current.value === "") {
       setErrorLastName("This field is required");
     }
     else {
       setErrorLastName("");
     }
-    
-    if(inputRefMesssge.current.value === "") {
+
+    if (inputRefMesssge.current.value === "") {
       setErrorMessage("This field is required");
     }
     else {
       setErrorMessage("");
+    }
+
+    if ((inputRefRadioGeneralEnquiry.current.checked === true || inputRefRadioSupportRequest.current.checked === true)
+      && inputRefCheckbox.current.checked === true
+      && inputRefEmail.current.value !== ""
+      && isValidEmail(inputRefEmail.current.value)
+      && inputRefFirstName.current.value !== ""
+      && inputRefLastName.current.value !== ""
+      && inputRefMesssge.current.value !== "") {
+      setDisplayPopup("flex");
+
+      setTimeout(() => {
+        setDisplayPopup("none");
+      }, 3000)
+
+      inputRefCheckbox.current.checked = false;
+      inputRefRadioGeneralEnquiry.current.checked = false;
+      inputRefRadioSupportRequest.current.checked = false;
+      inputRefFirstName.current.value = "";
+      inputRefLastName.current.value = "";
+      inputRefEmail.current.value = "";
+      inputRefMesssge.current.value = "";
     }
   }
 
@@ -107,7 +144,7 @@ function App() {
           {inputComponent("Email Address", "email", errorEmail, inputRefEmail)}
         </div>
         <div className='form-section'>
-          <div className='label-title'>Query Type <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
+          <div className='label-title'>Query Type <span style={{ color: "hsl(169, 82%, 27%)" }}>*</span></div>
           <div className='radio-section'>
             {radioComponent("General Enquiry", inputRefRadioGeneralEnquiry)}
             {radioComponent("Support Request", inputRefRadioSupportRequest)}
@@ -116,15 +153,16 @@ function App() {
         </div>
         <div className='form-section'>
           <div className='box-input'>
-            <div className='label-title'>Message <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></div>
-            <textarea ref={inputRefMesssge}/>
+            <div className='label-title'>Message <span style={{ color: "hsl(169, 82%, 27%)" }}>*</span></div>
+            <textarea ref={inputRefMesssge} />
             <label className='error-label'>{errorMessage}</label>
           </div>
         </div>
-        <div className='form-section' style={{flexDirection: 'column'}}>
+        <div className='form-section' style={{ flexDirection: 'column' }}>
           <div className='checkbox-input'>
-            <input type='checkbox' id='checkbox1' ref={inputRefCheckbox}/>
-            <label for="checkbox1">I consent to being contacted by the team <span style={{color: "hsl(169, 82%, 27%)"}}>*</span></label>
+            <input type='checkbox' id='checkbox1' ref={inputRefCheckbox} />
+            <span className='checkmark-checkbox'></span>
+            <label for="checkbox1">I consent to being contacted by the team <span style={{ color: "hsl(169, 82%, 27%)" }}>*</span></label>
           </div>
           <label className='error-label'>{errorCheckbox}</label>
         </div>
@@ -132,6 +170,7 @@ function App() {
           <button onClick={onSubmitForm}>Submit</button>
         </div>
       </div>
+      {resultPopup()}
     </div>
   );
 }
