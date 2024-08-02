@@ -17,17 +17,22 @@ function App() {
   const inputRefMesssge = useRef(null);
   const inputRefCheckbox = useRef(null);
 
+  const [isErrorFisrtName, setIsErrorFirstName] = useState(false);
+  const [isErrorLastName, setIsErrorLastName] = useState(false);
+  const [isErrorEmail, setIsErrorEmail] = useState(false);
+  const [isErrorMessage, setIsErrorMessage] = useState(false);
+
   const [displayPopup, setDisplayPopup] = useState("none");
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   }
 
-  const inputComponent = (labelName, type, errorState, ref) => {
+  const inputComponent = (labelName, type, errorState, ref, borderColor) => {
     return (
       <div className='box-input'>
         <label className='label-title'>{labelName} <span style={{ color: "hsl(169, 82%, 27%)" }}>*</span></label>
-        <input type={type} ref={ref}></input>
+        <input type={type} ref={ref} style={{borderColor: borderColor}}></input>
         <label className='error-label'>{errorState}</label>
       </div>
     );
@@ -80,33 +85,42 @@ function App() {
 
     if (inputRefEmail.current.value === "") {
       setErrorEmail("This field is required");
+      setIsErrorEmail(true);
     }
     else if (!isValidEmail(inputRefEmail.current.value)) {
       setErrorEmail("Please enter a valid email address");
+      setIsErrorEmail(true);
     }
     else {
       setErrorEmail("");
+      setIsErrorEmail(false)
     }
 
     if (inputRefFirstName.current.value === "") {
       setErrorFirstName("This field is required");
+      setIsErrorFirstName(true);
     }
     else {
       setErrorFirstName("");
+      setIsErrorFirstName(false);
     }
 
     if (inputRefLastName.current.value === "") {
       setErrorLastName("This field is required");
+      setIsErrorLastName(true);
     }
     else {
       setErrorLastName("");
+      setIsErrorLastName(false);
     }
 
     if (inputRefMesssge.current.value === "") {
       setErrorMessage("This field is required");
+      setIsErrorMessage(true);
     }
     else {
       setErrorMessage("");
+      setIsErrorMessage(false);
     }
 
     if ((inputRefRadioGeneralEnquiry.current.checked === true || inputRefRadioSupportRequest.current.checked === true)
@@ -137,11 +151,11 @@ function App() {
       <div className='form-main'>
         <h2>Contact Us</h2>
         <div className='form-section'>
-          {inputComponent("First Name", "text", errorFirstName, inputRefFirstName)}
-          {inputComponent("Last Name", "text", errorLastName, inputRefLastName)}
+          {inputComponent("First Name", "text", errorFirstName, inputRefFirstName, isErrorFisrtName ? 'var(--Red)' : "")}
+          {inputComponent("Last Name", "text", errorLastName, inputRefLastName, isErrorLastName ? "var(--Red)" : "")}
         </div>
         <div className='form-section'>
-          {inputComponent("Email Address", "email", errorEmail, inputRefEmail)}
+          {inputComponent("Email Address", "email", errorEmail, inputRefEmail, isErrorEmail ? "var(--Red)" : "")}
         </div>
         <div className='form-section'>
           <div className='label-title'>Query Type <span style={{ color: "hsl(169, 82%, 27%)" }}>*</span></div>
@@ -154,7 +168,7 @@ function App() {
         <div className='form-section'>
           <div className='box-input'>
             <div className='label-title'>Message <span style={{ color: "hsl(169, 82%, 27%)" }}>*</span></div>
-            <textarea ref={inputRefMesssge} />
+            <textarea ref={inputRefMesssge} style={{borderColor: isErrorMessage ? "var(--Red)" : ""}}/>
             <label className='error-label'>{errorMessage}</label>
           </div>
         </div>
